@@ -22,7 +22,8 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'edit-student',
     loadChildren: () => import('./edit-student/edit-student.module').then( m => m.EditStudentPageModule)
   },

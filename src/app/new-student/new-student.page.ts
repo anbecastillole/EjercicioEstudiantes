@@ -61,7 +61,7 @@ export class NewStudentPage implements OnInit {
       ],
       'photo':[
         {type: 'required',message:"Foto obligatoria"}, //PATTERN
-        {type: 'pattern',message:"URL de foto mal formado"}
+       
       ]
 
     }

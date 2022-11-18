@@ -6,6 +6,7 @@ import {Student} from "../models/student"; //1
 })
 export class StudentService {
   private students: Student[]; //2
+  private admin: boolean = false; //?
   constructor() { 
     this.students = [ //3
       {
