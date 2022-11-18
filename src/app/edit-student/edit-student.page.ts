@@ -5,17 +5,20 @@ import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 @Component({
-  selector: 'app-new-student',
-  templateUrl: './new-student.page.html',
-  styleUrls: ['./new-student.page.scss'],
+  selector: 'app-edit-student',
+  templateUrl: './edit-student.page.html',
+  styleUrls: ['./edit-student.page.scss'],
 })
-export class NewStudentPage implements OnInit {
+export class EditStudentPage implements OnInit {
   public student: Student;
   public myForm : FormGroup;
   public validatorsMessages: Object;
 
   constructor(private studentService: StudentService, private fb: FormBuilder,
-    private alertController: AlertController, private toastController: ToastController) { }
+    private alertController: AlertController, private toastController: ToastController) { 
+
+
+    }
 
 
   ngOnInit() {
@@ -28,7 +31,7 @@ export class NewStudentPage implements OnInit {
         age:["",Validators.compose([Validators.required,Validators.min(17),Validators.pattern('^[0-9]+')])],
         nip:["",Validators.compose([Validators.required,Validators.min(10),Validators.max(9999)])],
         email:["",Validators.compose([Validators.required,Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z0-9-]{2,}$")])], //pattern
-        photo:["",Validators.compose([Validators.required,Validators.pattern(/https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*/)])]
+        photo:["",Validators.compose([Validators.required])]
       }
     );
     this.validatorsMessages = {
@@ -60,9 +63,8 @@ export class NewStudentPage implements OnInit {
         {type: 'pattern',message:"Email mal formado"}
       ],
       'photo':[
-        {type: 'required',message:"Foto obligatoria"},
-        {type: 'pattern',message:"Foto mal formada"} //PATTERN
-       
+        {type: 'required',message:"Foto obligatoria"}, //PATTERN
+        {type: 'pattern',message:"URL de foto mal formado"}
       ]
 
     }
@@ -102,7 +104,7 @@ export class NewStudentPage implements OnInit {
         photo: this.myForm.get('photo').value,
       
       }  
-      this.studentService.newStudent(this.student);
+      this.studentService.editStudent(1, this.student);
               //this.presentAlert();
         this.presentToast("top")
         console.log(this.student);

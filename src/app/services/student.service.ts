@@ -61,5 +61,9 @@ export class StudentService {
   public newStudent(student:Student) : void {
       this.students.push(student);
   }
-
+  
+  public editStudent(pos:number,student:Student) : void {
+      this.removeStudent(pos);
+      this.students.push(student);
+  }
 }

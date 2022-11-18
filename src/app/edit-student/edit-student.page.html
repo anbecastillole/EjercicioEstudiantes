@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-grid>
-    <form [formGroup]="myForm"> <!--este es el enlace -->
+    <form> <!--este es el enlace   [formGroup]="myForm"-->
       <ion-row>
         <ion-col>
           <ion-item>
@@ -110,11 +110,6 @@
               </div>
             </ng-container>
           </div>
-        </ion-col>
-        <ion-col>
-          <ion-button expand="block" (click)="newStudent()">
-            <ion-icon name="log-in"></ion-icon>
-          </ion-button>
         </ion-col>
       </ion-row>
       <ion-button class="ion-margin"  (click)="newStudent()" expand="block" fill="clear" shape="round" [routerLink]="['/home']">
