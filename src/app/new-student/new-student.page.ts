@@ -24,7 +24,7 @@ export class NewStudentPage implements OnInit {
         age:["",Validators.compose([Validators.required,Validators.min(17),Validators.pattern('^[0-9]+')])],
         nip:["",Validators.compose([Validators.required,Validators.min(10),Validators.max(9999)])],
         email:["",Validators.compose([Validators.required,Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z0-9-]{2,}$")])], //pattern
-        photo:["",Validators.compose([Validators.required])]
+        photo:["",Validators.compose([Validators.required,Validators.pattern(/https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*/)])]
       }
     );
     this.validatorsMessages = {
@@ -56,7 +56,8 @@ export class NewStudentPage implements OnInit {
         {type: 'pattern',message:"Email mal formado"}
       ],
       'photo':[
-        {type: 'required',message:"Foto obligatoria"}, //PATTERN
+        {type: 'required',message:"Foto obligatoria"},
+        {type: 'pattern',message:"Foto mal formada"} //PATTERN
        
       ]
 
@@ -65,7 +66,16 @@ export class NewStudentPage implements OnInit {
 
   public newStudent(): void {
     //construir el objeto
- 
+    this.student={
+      controlnumber: this.myForm.value.controlnumber,
+      age: this.myForm.value.age,
+      career: this.myForm.value.career,
+      curp: this.myForm.value.curp,
+      email: this.myForm.value.email,
+      name: this.myForm.value.name,
+      nip: this.myForm.value.nip,
+      photo: this.myForm.value.photo
+    }
     this.studentService.newStudent(this.student);
   }
 
