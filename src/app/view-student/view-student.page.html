@@ -32,7 +32,11 @@
       <h2>
         EDAD: {{student.age}} años
       </h2>
+      <ion-button class="ion-margin"expand="block" fill="clear" shape="round" [routerLink]="['/edit-student',student.age]">
+        Editar Estudiante
+      </ion-button>
     </ion-card-content>
+
   </ion-card>
 
 </ion-content>

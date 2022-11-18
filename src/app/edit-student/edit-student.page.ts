@@ -5,17 +5,20 @@ import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 @Component({
-  selector: 'app-new-student',
-  templateUrl: './new-student.page.html',
-  styleUrls: ['./new-student.page.scss'],
+  selector: 'app-edit-student',
+  templateUrl: './edit-student.page.html',
+  styleUrls: ['./edit-student.page.scss'],
 })
-export class NewStudentPage implements OnInit {
+export class EditStudentPage implements OnInit {
   public student: Student;
   public myForm : FormGroup;
   public validatorsMessages: Object;
 
   constructor(private studentService: StudentService, private fb: FormBuilder,
-    private alertController: AlertController, private toastController: ToastController) { }
+    private alertController: AlertController, private toastController: ToastController) { 
+
+
+    }
 
 
   ngOnInit() {
@@ -101,7 +104,7 @@ export class NewStudentPage implements OnInit {
         photo: this.myForm.get('photo').value,
       
       }  
-      this.studentService.newStudent(this.student);
+      this.studentService.editStudent(1, this.student);
               //this.presentAlert();
         this.presentToast("top")
         console.log(this.student);

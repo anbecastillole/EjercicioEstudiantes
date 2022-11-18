@@ -18,11 +18,14 @@ export class HomePage {
    
     this.students = this.studentService.getStudents();
   }
+  
   public removeStudent(pos:number){
     this.studentService.removeStudent(pos);
     this.students = this.studentService.getStudents();
   }
+  
   public getStudentByControlNumber(cn: string): void {
+
     this.router.navigate(
       ['/view-student'],
       {
