@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
  
  async login() {
     if (this.user == "admin" && this.pass == "123") {
+      this.studentService.adminSi()
       this.router.navigate(['/home'])
       this.user = ""
       this.pass = ""

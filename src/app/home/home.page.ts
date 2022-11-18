@@ -23,7 +23,10 @@ export class HomePage {
     this.studentService.removeStudent(pos);
     this.students = this.studentService.getStudents();
   }
-  
+  newStudent(){
+    this.router.navigate(['/new-student'], {
+    });
+  }
   public getStudentByControlNumber(cn: string): void {
 
     this.router.navigate(

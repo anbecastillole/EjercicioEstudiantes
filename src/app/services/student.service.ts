@@ -62,8 +62,21 @@ export class StudentService {
       this.students.push(student);
   }
   
-  public editStudent(pos:number,student:Student) : void {
-      this.removeStudent(pos);
-      this.students.push(student);
+  public editStudent(st: Student) {
+    this.students.find((student)=> {
+      if(student.controlnumber===st.controlnumber)
+        student=st 
+    });
+  }
+  esAdmin(){
+    return this.admin;
+  }
+
+  adminSi(){
+    this.admin=true;
+  }
+
+  adminNo(){
+    this.admin=false;
   }
 }

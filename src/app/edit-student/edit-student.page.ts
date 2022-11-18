@@ -4,6 +4,7 @@ import { StudentService } from '../services/student.service';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-edit-student',
   templateUrl: './edit-student.page.html',
@@ -14,14 +15,21 @@ export class EditStudentPage implements OnInit {
   public myForm : FormGroup;
   public validatorsMessages: Object;
 
-  constructor(private studentService: StudentService, private fb: FormBuilder,
-    private alertController: AlertController, private toastController: ToastController) { 
+  constructor(private studentService: StudentService, private fb: FormBuilder, private activatedRoute: ActivatedRoute,
+    private alertController: AlertController, private toastController: ToastController, private router: Router) { 
 
 
     }
 
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe((params)=>{
+        const res = params.get
+        console.log(params.cn+"Hola");
+        this.student = this.studentService.getStudentByControlNumber(params.cn);
+      }
+    );
+
     this.myForm= this.fb.group(
       {
         carrera:["",Validators.compose([Validators.required])],
@@ -31,7 +39,7 @@ export class EditStudentPage implements OnInit {
         age:["",Validators.compose([Validators.required,Validators.min(17),Validators.pattern('^[0-9]+')])],
         nip:["",Validators.compose([Validators.required,Validators.min(10),Validators.max(9999)])],
         email:["",Validators.compose([Validators.required,Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z0-9-]{2,}$")])], //pattern
-        photo:["",Validators.compose([Validators.required])]
+        photo:["",Validators.compose([Validators.required,Validators.pattern(/https?:\/\/[\w\-\.]+\.\w{2,5}\/?\S*/)])]
       }
     );
     this.validatorsMessages = {
@@ -89,7 +97,7 @@ export class EditStudentPage implements OnInit {
     });
 
     await toast.present();
-  }
+  }/*
   public newStudent(){
     if(this.myForm.get('name').value!==''){
       this.student = {
@@ -112,6 +120,23 @@ export class EditStudentPage implements OnInit {
         console.log(this.student);
         this.presentAlertError()
       }
+    }*/
+
+    public editStudent(){
+      this.student={
+        controlnumber: this.myForm.value.controlnumber,
+        age: this.myForm.value.age,
+        career: this.myForm.value.career,
+        curp: this.myForm.value.curp,
+        email: this.myForm.value.email,
+        name: this.myForm.value.name,
+        nip: this.myForm.value.nip,
+        photo: this.myForm.value.photo
+      }
+  
+      this.studentService.editStudent(this.student);
+      this.router.navigate(['/home'], {
+      });
     }
  
 
