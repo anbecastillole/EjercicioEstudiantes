@@ -24,7 +24,7 @@ export class NewStudentPage implements OnInit {
         age:["",Validators.compose([Validators.required,Validators.min(17),Validators.pattern('^[0-9]+')])],
         nip:["",Validators.compose([Validators.required,Validators.min(10),Validators.max(9999)])],
         email:["",Validators.compose([Validators.required,Validators.pattern("^[^@]+@[^@]+\.[a-zA-Z0-9-]{2,}$")])], //pattern
-        photo:["",Validators.compose([Validators.required,Validators.pattern('^(www)?.+\.[a-z]{2,6}(\.[a-z]{2,6})?.+\.[a-z]{2,4}$')])]
+        photo:["",Validators.compose([Validators.required])]
       }
     );
     this.validatorsMessages = {
@@ -57,7 +57,7 @@ export class NewStudentPage implements OnInit {
       ],
       'photo':[
         {type: 'required',message:"Foto obligatoria"}, //PATTERN
-        {type: 'pattern',message:"URL de foto mal formado"}
+       
       ]
 
     }
@@ -65,6 +65,7 @@ export class NewStudentPage implements OnInit {
 
   public newStudent(): void {
     //construir el objeto
+ 
     this.studentService.newStudent(this.student);
   }
 
