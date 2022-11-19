@@ -37,4 +37,10 @@ export class HomePage {
     );
   }
 
+  logout(){
+    this.studentService.adminNo()
+    this.router.navigate(['/login'], {
+    });
+  }
+
 }

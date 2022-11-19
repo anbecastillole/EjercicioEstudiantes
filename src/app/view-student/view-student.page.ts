@@ -36,4 +36,10 @@ export class ViewStudentPage implements OnInit {
     });
   }
 
+  
+  logout(){
+    this.router.navigate(['/login'], {
+    });
+  }
+
 }
